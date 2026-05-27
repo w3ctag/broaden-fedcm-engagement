@@ -1,13 +1,14 @@
 <pre class='metadata'>
-Title: Your Spec Title
-Shortname: your-spec
+Title: Broaden FedCM Engagement
+Shortname: broaden-fedcm-engagement
 Level: None
 Status: DRAFT-FINDING
 Group: TAG
-ED: https://w3ctag.github.io/repo-name/
-Repository: w3ctag/repo-name
-Editor: Your Name, Your Company http://example.com/your-company, your-email@example.com, http://example.com/your-personal-website
-Abstract: A short description of your spec, one or two sentences.
+ED: https://w3ctag.github.io/broaden-fedcm-engagement/
+Repository: w3ctag/broaden-fedcm-engagement
+Editor: Jeffrey Yasskin, Google https://google.com, jyasskin@google.com, https://jeffrey.yasskin.info/
+Editor: Heather Flanagan, Spherical Cow Consulting https://sphericalcowconsulting.com/
+Abstract: More implementers and developers should participate publicly in FedCM design
 Complain About: accidental-2119 yes, missing-example-ids yes
 Assume Explicit For: on
 Die On: lint
@@ -15,7 +16,70 @@ Markup Shorthands: markdown yes, css no
 Boilerplate: conformance no
 </pre>
 
-Introduction {#intro}
-=====================
+# Background # {#background}
 
-Introduction here.
+With the removal of third-party (3p) cookies from Firefox, Safari, and a few other browsers,
+these browsers no longer support
+[certain use cases](https://github.com/fedidcg/use-case-library/wiki/Primitives-by-Use-Case)
+involving federated sign-in.
+The websites whose users need these use cases have been encouraging their users to use Chrome instead.
+We applaud Firefox and Safari for preventing the tracking associated with 3p cookies
+([web-without-3p-cookies](https://www.w3.org/2001/tag/doc/web-without-3p-cookies/)),
+but this fragmentation is bad for the Web.
+Fortunately, the [Federated Credential Management (FedCM) API](https://w3c-fedid.github.io/FedCM/)
+is being developed to serve those use cases even in browsers that block 3p cookies.
+Unfortunately, Safari, Servo, and Ladybird have never participated in its Working Group,
+and Firefox has stopped participating.
+
+While Chrome developers started working on the FedCM project to support the Privacy Sandbox,
+an effort to follow Firefox and Safari in removing 3p cookies,
+[that effort was cancelled in late 2025](https://privacysandbox.google.com/blog/update-on-plans-for-privacy-sandbox-technologies)
+([archive](https://web.archive.org/web/20251205155604/https://privacysandbox.google.com/blog/update-on-plans-for-privacy-sandbox-technologies)).
+For the Chromium project,
+FedCM now acts as a way to [pave cowpaths](https://extensiblewebmanifesto.org/#:~:text=cow%2Dpaths%20for%20the%20platform%20to%20pave)
+and potentially to
+[help user agents act more autonomously in use cases that require federated sign-in](https://github.com/w3c-fedid/meetings/blob/main/2026/2026-01-27-FedCM-notes.md#agentic-login-toolkit).
+Chromium’s experimental support led the Bluesky project
+to [start exploring ways to decentralize federated sign-in](https://atproto.com/blog/working-to-decentralize-fedcm),
+which the TAG is very excited about.
+
+It can be good for the Web
+when the Chromium project does research and development for the rest of the ecosystem.
+Chromium browsers can launch experimental features
+to see if websites adopt them enough to justify implementation investment by the other browsers.
+If the feature needs to change in order to become interoperable,
+these browsers also take the risk of migrating their users to the new version.
+This happened relatively successfully with [Shadow DOM v0](https://chromestatus.com/feature/4507242028072960),
+and less successfully with [WebRTC Plan B](https://webrtc.org/getting-started/unified-plan-transition-guide).
+
+# Risks # {#risks}
+
+However, we see some warning signs with the FedCM API.
+Websites that hope to adopt the feature are iterating directly with Chromium developers
+instead of in public Working Group meetings.
+And as mentioned above,
+the other browser engines aren’t actively checking the design against their architectures
+or against the features they expect to be willing to ship.
+This increases the risk that the design will need to change in order to become interoperable,
+and if that happens,
+it will increase the time before the feature is an interoperable part of the Web.
+During that time, in which some browsers cannot support certain use cases,
+the norm that [users can choose their own browsers](https://www.w3.org/TR/ethical-web-principles/#multi)
+will be further eroded.
+
+In addition, given the broad remit of the work, the FedCM API is extremely complex.
+While the full API surface is primarily intended for browser engines,
+with Identity Providers only required to add limited functionality to their codebases,
+the overall architecture places a substantial implementation burden on browser vendors.
+This complexity increases the cost of implementation, review, and maintenance,
+and may slow adoption or lead to divergent interpretations across browser engines.
+
+# Recommendations # {#recommendations}
+
+Thus, we encourage:
+
+* Website developers who are interested in this API to participate in public, rather than just in direct conversations with particular implementers.
+* Chromium implementers to also encourage their partners to participate in public.
+* Apple to dedicate a larger fraction of its [search-deal revenue](https://www.bloomberg.com/news/articles/2025-09-02/apple-gains-on-us-ruling-that-spares-search-deal-with-google?embedded-checkout=true) toward participating in the design of this and other APIs.
+* Website developers to help fund implementation in other engines, so that their architectures can be incorporated into this design.
+* The working group to prioritize defining a minimal core API that addresses the most broadly applicable use cases, with additional functionality introduced through clearly defined extensions as implementation experience develops.
